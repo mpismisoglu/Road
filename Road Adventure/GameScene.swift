@@ -9,12 +9,21 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+struct Physics {
+    static let car : UInt32 = 0x1 << 1
+    static let coin : UInt32 = 0x1 << 4
+    static let roadCar : UInt32 = 0x1 << 3
+    
+
+}
+
+class GameScene: SKScene, SKPhysicsContactDelegate{
     
     var bg = SKSpriteNode()
     var bg2 = SKSpriteNode()
     var bg3 = SKSpriteNode()
     var car = SKSpriteNode()
+    var coin = SKSpriteNode()
     var originalPosition = CGPoint(x: 0, y: 0)
     var parallax = SKAction()
     var i = 0
@@ -23,6 +32,7 @@ class GameScene: SKScene {
     
   
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
        bg = SKSpriteNode(imageNamed: "road")
         bg.position = CGPoint(x: self.frame.width/2, y:0)
        bg.zPosition = 3
@@ -54,20 +64,68 @@ class GameScene: SKScene {
         car.position = CGPoint(x: self.frame.width/2, y: self.frame.height/7 )
         car.zPosition = 5
         car.size = CGSize(width: 125, height: 300)
+        let carTex = SKTexture(imageNamed: "car")
+        car.physicsBody = SKPhysicsBody(texture: carTex, size: car.size)
+        car.physicsBody?.isDynamic = true
+        car.physicsBody?.affectedByGravity = false
         
+        car.physicsBody?.categoryBitMask = Physics.car
+        car.physicsBody?.collisionBitMask =  Physics.roadCar
+        car.physicsBody?.contactTestBitMask = Physics.coin | Physics.roadCar
         addChild(car)
+        let timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(spawn), userInfo: nil, repeats: true)
         
         
         
     }
     
+    @objc func spawn() {
+        let dispatchQueue = DispatchQueue.init(label: "queue", attributes: .concurrent)
+        dispatchQueue.async {
+            self.coin = SKSpriteNode(imageNamed: "coin")
+        let coinTex = SKTexture(imageNamed: "coin")
+            self.coin.zPosition = 5
+            self.coin.size = CGSize(width: 75, height: 75)
+            
+              let randomPosition = CGFloat.random(in: 50 ... 700)
+            self.coin.position = CGPoint(x: randomPosition, y: self.frame.height)
+            self.coin.physicsBody = SKPhysicsBody(texture: coinTex, size: self.coin.size)
+            self.coin.physicsBody?.affectedByGravity = false
+            self.coin.physicsBody?.isDynamic = false
+            self.coin.physicsBody?.categoryBitMask = Physics.coin
+            self.coin.physicsBody?.collisionBitMask = 0
+            self.coin.physicsBody?.contactTestBitMask = Physics.car
+        
+        let move = SKAction.move(by: CGVector(dx: 0, dy: -self.frame.size.height-50), duration: 2)
+        let remove = SKAction.removeFromParent()
+        
+        let moveAndRemove = SKAction.sequence([move,remove])
+       
+        
+            self.addChild(self.coin)
+            self.coin.run(moveAndRemove)
+        }
+        
+    }
     
-    
-   
-   
-   
-    
-    
+      func didBegin(_ contact: SKPhysicsContact) {
+        let firstBody = contact.bodyA
+        let secondBody = contact.bodyB
+        
+        if firstBody.categoryBitMask == Physics.car && secondBody.categoryBitMask == Physics.coin {
+            
+            secondBody.node?.removeFromParent()
+        }
+        
+        if firstBody.categoryBitMask == Physics.coin && secondBody.categoryBitMask == Physics.car {
+            
+            firstBody.node?.removeFromParent()
+
+            
+              }
+        
+        
+    }
   
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -77,9 +135,6 @@ class GameScene: SKScene {
     }
     
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-       
-    }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
