@@ -14,8 +14,10 @@ class GameScene: SKScene {
     var bg = SKSpriteNode()
     var bg2 = SKSpriteNode()
     var bg3 = SKSpriteNode()
-
+    var car = SKSpriteNode()
+    var originalPosition = CGPoint(x: 0, y: 0)
     var parallax = SKAction()
+    var i = 0
     
    
     
@@ -48,6 +50,14 @@ class GameScene: SKScene {
         bg2.run(parallax)
         bg3.run(parallax)
         
+        car = SKSpriteNode(imageNamed: "blue")
+        car.position = CGPoint(x: self.frame.width/2, y: self.frame.height/7 )
+        car.zPosition = 5
+        car.size = CGSize(width: 125, height: 300)
+        
+        addChild(car)
+        
+        
         
     }
     
@@ -61,9 +71,45 @@ class GameScene: SKScene {
   
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-               
+        let touch = touches.first
+        let touchedPosition = touch?.location(in: self)
+        originalPosition = touchedPosition!
     }
     
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+       
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        let finalTouch = touch?.location(in: self)
+        
+        let toLeft = SKAction.moveBy(x: -self.frame.width/3, y: 0, duration: 0.3)
+         let toRight = SKAction.moveBy(x: self.frame.width/3, y: 0, duration: 0.3)
+       
+        
+        if originalPosition.x - finalTouch!.x > 0 {
+            if i != -1 {
+            car.run(toLeft)
+            i -= 1
+            }
+        }
+           
+        
+        
+        if originalPosition.x - finalTouch!.x < 0
+        {
+            if i != 1 {
+           
+            
+                car.run(toRight)
+                i += 1
+            }
+        }
+    
+    
+    }
     
    
     
