@@ -1,10 +1,3 @@
-//
-//  GameViewController.swift
-//  Road Adventure
-//
-//  Created by Mert Pişmişoğlu on 26.06.2020.
-//  Copyright © 2020 Mert Pişmişoğlu. All rights reserved.
-//
 
 import UIKit
 import SpriteKit
@@ -26,10 +19,10 @@ class GameViewController: UIViewController {
             }
             
             view.ignoresSiblingOrder = true
-            
             view.showsFPS = true
-            view.showsNodeCount = true
             view.showsPhysics = true
+            view.showsNodeCount = true
+            
         }
     }
 

@@ -1,10 +1,3 @@
-//
-//  GameScene.swift
-//  Road Adventure
-//
-//  Created by Mert Pişmişoğlu on 26.06.2020.
-//  Copyright © 2020 Mert Pişmişoğlu. All rights reserved.
-//
 
 import SpriteKit
 import GameplayKit
@@ -22,6 +15,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var bg = SKSpriteNode()
     var bg2 = SKSpriteNode()
     var bg3 = SKSpriteNode()
+    let dispatchQueue = DispatchQueue(label: "queue", attributes: .concurrent)
+
     var car = SKSpriteNode()
     var coin = SKSpriteNode()
     var roadCar = SKSpriteNode()
@@ -29,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var parallax = SKAction()
     var i = 0
     var score = 0
+    var scoreLabel = SKLabelNode()
     var gameStarted = false
     var died = false
     var RestartBtn = SKSpriteNode()
@@ -37,6 +33,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var timer3 = Timer()
     var timer4 = Timer()
     var interval = 2.0
+    var duration = Double()
+    
     
    
     
@@ -53,6 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         died = false
         i = 0
         interval = 2.0
+        score = 0
         createScene()
     }
     func createScene() {
@@ -65,14 +64,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                bg.name = "bg"
                
                
-              bg2 = SKSpriteNode(imageNamed: "road")
+              bg2 = SKSpriteNode(imageNamed: "road-1")
                bg2.position = CGPoint(x: self.frame.size.width/2, y:self.frame.height)
               bg2.zPosition = 3
                bg2.size = CGSize(width: self.frame.size.width, height: self.frame.height*1.1)
                bg2.name = "bg2"
                
                
-              bg3 = SKSpriteNode(imageNamed: "road")
+              bg3 = SKSpriteNode(imageNamed: "road-2")
                bg3.position = CGPoint(x: self.frame.size.width/2, y:self.frame.height + bg2.position.y)
               bg3.zPosition = 3
                bg3.size = CGSize(width: self.frame.size.width, height: self.frame.height*1.1)
@@ -87,15 +86,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                car.position = CGPoint(x: self.frame.width/2, y: self.frame.height/7 )
                car.zPosition = 5
                car.size = CGSize(width: 125, height: 300)
-               let carTex = SKTexture(imageNamed: "car")
+               let carTex = SKTexture(imageNamed: "blue")
                car.physicsBody = SKPhysicsBody(texture: carTex, size: car.size)
                car.physicsBody?.isDynamic = true
                car.physicsBody?.affectedByGravity = false
                
                car.physicsBody?.categoryBitMask = Physics.car
-               car.physicsBody?.collisionBitMask =  Physics.roadCar
-               car.physicsBody?.contactTestBitMask = Physics.coin | Physics.roadCar
+        car.physicsBody?.collisionBitMask =  Physics.roadCar
+        car.physicsBody?.contactTestBitMask = Physics.roadCar | Physics.coin
                addChild(car)
+        
+        scoreLabel.text = "\(score)m"
+        scoreLabel.fontSize = 92
+        scoreLabel.fontName = "ChalkboardSE-Bold"
+        scoreLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.2)
+        scoreLabel.zPosition = 10
+        addChild(scoreLabel)
                
                
     }
@@ -112,8 +118,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     @objc func spawn() {
-        let dispatchQueue = DispatchQueue.init(label: "queue", attributes: .concurrent)
-        dispatchQueue.async {
+        dispatchQueue.async(qos: .userInitiated) {
             self.coin = SKSpriteNode(imageNamed: "coin")
         let coinTex = SKTexture(imageNamed: "coin")
             self.coin.zPosition = 4
@@ -131,24 +136,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             
             
         
-            let move = SKAction.move(by: CGVector(dx: 0, dy: -self.frame.size.height-50), duration: self.interval)
+            let move = SKAction.move(by: CGVector(dx: 0, dy: -self.frame.size.height-50), duration: 1.4)
         let remove = SKAction.removeFromParent()
         
         let moveAndRemove = SKAction.sequence([move,remove])
        
-        
+         DispatchQueue.main.async{
             self.addChild(self.coin)
             self.coin.run(moveAndRemove)
+            }
         }
         
     }
     
     @objc func spawnCar() {
         
-        let dispatchQueue = DispatchQueue.init(label: "queue", attributes: .concurrent)
-        dispatchQueue.async {
+        dispatchQueue.async(qos: .userInitiated) {
             
-           
+            
+            
+        
             
               let randomColor = Int.random(in: 1 ... 4)
             if randomColor == 1 {
@@ -203,23 +210,72 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             
             self.roadCar.physicsBody = SKPhysicsBody(texture: roadCarTex, size: self.roadCar.size)
             self.roadCar.physicsBody?.affectedByGravity = false
-            self.roadCar.physicsBody?.isDynamic = false
+            self.roadCar.physicsBody?.isDynamic = true
             self.roadCar.physicsBody?.categoryBitMask = Physics.roadCar
             self.roadCar.physicsBody?.collisionBitMask = Physics.car
             self.roadCar.physicsBody?.contactTestBitMask = Physics.car
-            let move = SKAction.move(by: CGVector(dx: 0, dy: -self.frame.size.height-300), duration: self.interval)
+            
+            
+            if self.score < 100 {
+                           
+                self.duration = 1.1
+                       }
+            
+            if self.score >= 100 && self.score < 200 {
+                           
+                self.duration = 1.05
+                       }
+            if self.score >= 200 && self.score < 300 {
+                
+                self.duration = 1.0
+            }
+            
+            if self.score >= 300 && self.score < 400 {
+                
+                self.duration = 0.95
+            }
+            if self.score >= 400 && self.score < 500 {
+                           
+                self.duration = 0.90
+                       }
+            if self.score >= 500 && self.score < 600 {
+                
+                self.duration = 0.85
+            }
+            
+            if self.score >= 600 && self.score < 700 {
+                           
+                self.duration = 0.80
+                       }
+            if self.score >= 700 && self.score < 800 {
+                
+                self.duration = 0.75
+            }
+            if self.score >= 800 && self.score < 900 {
+                           
+                self.duration = 0.70
+                       }
+            if self.score >= 900 && self.score < 1000  {
+                           
+                self.duration = 0.65
+                       }
+            if self.score >= 1000  {
+                
+                self.duration = 0.60
+            }
+           
+            
+            let move = SKAction.move(by: CGVector(dx: 0, dy: -self.frame.size.height-300), duration: self.duration)
                   let remove = SKAction.removeFromParent()
                   
                   let moveAndRemove = SKAction.sequence([move,remove])
+            
+            DispatchQueue.main.async{
             self.addChild(self.roadCar)
             self.roadCar.run(moveAndRemove)
+            }
 
-
-            
         }
-              
-        
-        
     }
     
     
@@ -243,57 +299,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.timer.invalidate()
             self.timer2.invalidate()
             self.timer3.invalidate()
-
             
             enumerateChildNodes(withName: "bg", using: ({
-                                   (node, error) in
-                   node.speed = 0
-                       self.bg.removeAllActions()
-                   
-                   
-                   
-                  }))
-                   
-                   enumerateChildNodes(withName: "bg2", using: ({
-                                              (node, error) in
-                              node.speed = 0
-                       self.bg2.removeAllActions()
-                              
-                              
-                              
-                             }))
-                   
-                   enumerateChildNodes(withName: "bg3", using: ({
-                                              (node, error) in
-                              node.speed = 0
-                       self.bg3.removeAllActions()
-                              
-                              
-                              
-                             }))
+                                      (node, error) in
+                      node.speed = 0
+                          self.bg.removeAllActions()
+                      
+                      
+                      
+                     }))
+                      
+                      enumerateChildNodes(withName: "bg2", using: ({
+                                                 (node, error) in
+                                 node.speed = 0
+                          self.bg2.removeAllActions()
+                                 
+                                 
+                                 
+                                }))
+                      
+                      enumerateChildNodes(withName: "bg3", using: ({
+                                                 (node, error) in
+                                 node.speed = 0
+                          self.bg3.removeAllActions()
+                                 
+                                 
+                                 
+                                }))
+                      
+                      enumerateChildNodes(withName: "roadCar", using: ({
+                                                                            (node, error) in
+                                                            node.speed = 0
+                                                     self.roadCar.removeAllActions()
+                                                            
+                                                            
+                                                            
+                                                           }))
+                               
+                               enumerateChildNodes(withName: "coin", using: ({
+                                                                            (node, error) in
+                                                            node.speed = 0
+                                                     self.coin.removeAllActions()
+                                                            
+                                                            
+                                                            
+                                                           }))
+
             
-            enumerateChildNodes(withName: "roadCar", using: ({
-                                                         (node, error) in
-                                         node.speed = 0
-                                  self.roadCar.removeAllActions()
-                                         
-                                         
-                                         
-                                        }))
             
-            enumerateChildNodes(withName: "coin", using: ({
-                                                         (node, error) in
-                                         node.speed = 0
-                                  self.coin.removeAllActions()
-                                         
-                                         
-                                         
-                                        }))
-                   
-                   
-                   
-                   
-                   
                    
                    
                    if died == false{
@@ -317,53 +370,53 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.timer.invalidate()
             self.timer2.invalidate()
             self.timer3.invalidate()
-           
+            
             enumerateChildNodes(withName: "bg", using: ({
-                            (node, error) in
-            node.speed = 0
-                self.bg.removeAllActions()
-            
-            
-            
-           }))
-            
-            enumerateChildNodes(withName: "bg2", using: ({
-                                       (node, error) in
-                       node.speed = 0
-                self.bg2.removeAllActions()
-                       
-                       
-                       
-                      }))
-            
-            enumerateChildNodes(withName: "bg3", using: ({
-                                       (node, error) in
-                       node.speed = 0
-                self.bg3.removeAllActions()
-                       
-                       
-                       
-                      }))
-            
-            enumerateChildNodes(withName: "roadCar", using: ({
-                                                                  (node, error) in
-                                                  node.speed = 0
-                                           self.roadCar.removeAllActions()
-                                                  
-                                                  
-                                                  
-                                                 }))
-                     
-                     enumerateChildNodes(withName: "coin", using: ({
-                                                                  (node, error) in
-                                                  node.speed = 0
-                                           self.coin.removeAllActions()
-                                                  
-                                                  
-                                                  
-                                                 }))
-            
-            
+                                      (node, error) in
+                      node.speed = 0
+                          self.bg.removeAllActions()
+                      
+                      
+                      
+                     }))
+                      
+                      enumerateChildNodes(withName: "bg2", using: ({
+                                                 (node, error) in
+                                 node.speed = 0
+                          self.bg2.removeAllActions()
+                                 
+                                 
+                                 
+                                }))
+                      
+                      enumerateChildNodes(withName: "bg3", using: ({
+                                                 (node, error) in
+                                 node.speed = 0
+                          self.bg3.removeAllActions()
+                                 
+                                 
+                                 
+                                }))
+                      
+                      enumerateChildNodes(withName: "roadCar", using: ({
+                                                                            (node, error) in
+                                                            node.speed = 0
+                                                     self.roadCar.removeAllActions()
+                                                            
+                                                            
+                                                            
+                                                           }))
+                               
+                               enumerateChildNodes(withName: "coin", using: ({
+                                                                            (node, error) in
+                                                            node.speed = 0
+                                                     self.coin.removeAllActions()
+                                                            
+                                                            
+                                                            
+                                                           }))
+           
+          
             
             
             
@@ -394,15 +447,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         originalPosition = touchedPosition!
         
         if gameStarted == false {
-            parallax = SKAction.repeatForever(SKAction.move(by: CGVector(dx:0, dy: -self.frame.size.height - 50), duration:1.5))
+            parallax = SKAction.repeatForever(SKAction.move(by: CGVector(dx:0, dy: -self.frame.size.height - 50), duration:1.4))
 
             bg.run(parallax)
                          bg2.run(parallax)
                          bg3.run(parallax)
       
-            timer = Timer.scheduledTimer(timeInterval: 1.8, target: self, selector: #selector(spawn), userInfo: nil, repeats: true)
-            timer2 = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(spawnCar), userInfo: nil, repeats: true)
-            timer3 = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(Interval), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(spawn), userInfo: nil, repeats: true)
+            timer2 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(spawnCar), userInfo: nil, repeats: true)
+            timer3 = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(Score), userInfo: nil, repeats: true)
+            
           
 
             gameStarted = true
@@ -416,17 +470,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     
-    @objc func Interval() {
+    @objc func Score() {
         
-        interval -= 0.1
+        score += 1
+        scoreLabel.text = "\(score)m"
         
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         let finalTouch = touch?.location(in: self)
         
-        let toLeft = SKAction.moveBy(x: -self.frame.width/3, y: 0, duration: 0.3)
-         let toRight = SKAction.moveBy(x: self.frame.width/3, y: 0, duration: 0.3)
+        let toLeft = SKAction.moveBy(x: -self.frame.width/3, y: 0, duration: 0.2)
+         let toRight = SKAction.moveBy(x: self.frame.width/3, y: 0, duration: 0.2)
        
         
         if originalPosition.x - finalTouch!.x > 0 {
@@ -470,5 +525,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                bg3.position.y = self.frame.size.height * 2
             
            }
+       
     }
 }
