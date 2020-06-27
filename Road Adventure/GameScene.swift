@@ -24,7 +24,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var parallax = SKAction()
     var i = 0
     var score = 0
+    var highscore = 0
     var scoreLabel = SKLabelNode()
+    var deadScoreLabel = SKLabelNode()
+    var highscoreLabel = SKLabelNode()
     var gameStarted = false
     var died = false
     var RestartBtn = SKSpriteNode()
@@ -34,6 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var timer4 = Timer()
     var interval = 2.0
     var duration = Double()
+    
     
     
    
@@ -108,13 +112,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func createButton() {
         
         RestartBtn = SKSpriteNode(imageNamed: "RestartBtn")
-        RestartBtn.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.5)
+        RestartBtn.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.4)
         RestartBtn.size = CGSize(width: 500, height: 400)
-        RestartBtn.setScale(0)
+       RestartBtn.setScale(0)
         
-        RestartBtn.zPosition = 10
+        
+        RestartBtn.zPosition = 11
+        
+        deadScoreLabel.text  = "Score: \(score)m"
+        deadScoreLabel.fontSize = 45
+        deadScoreLabel.fontName = "ChalkboardSE-Bold"
+        deadScoreLabel.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/1.4)
+        deadScoreLabel.zPosition = 30
+        deadScoreLabel.setScale(0)
+        deadScoreLabel.fontColor = UIColor.black
+        
+        highscoreLabel.text = "Highscore: \(highscore)m"
+       highscoreLabel.fontSize = 45
+        highscoreLabel.fontName = "ChalkboardSE-Bold"
+        highscoreLabel.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/1.6)
+       highscoreLabel.zPosition = 30
+        highscoreLabel.setScale(0)
+        highscoreLabel.fontColor = UIColor.black
+        
+       
+        
         addChild(RestartBtn)
-        RestartBtn.run(SKAction.scale(to: 1.5, duration: 0.3))
+        addChild(deadScoreLabel)
+        addChild(highscoreLabel)
+        
+        RestartBtn.run(SKAction.scale(to: 1.5, duration: 0.15))
+        deadScoreLabel.run(SKAction.scale(to: 1.5, duration: 0.15))
+        highscoreLabel.run(SKAction.scale(to: 1.5, duration: 0.15))
+
     }
     
     @objc func spawn() {
@@ -304,6 +334,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                                       (node, error) in
                       node.speed = 0
                           self.bg.removeAllActions()
+                self.highscore = self.defaults.integer(forKey: "hs")
+
+                if self.score > self.highscore
+                {
+                    self.highscore = self.score
+                    
+                    self.defaults.set(self.highscore, forKey: "hs")
+                }
                       
                       
                       
@@ -375,6 +413,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                                       (node, error) in
                       node.speed = 0
                           self.bg.removeAllActions()
+                self.highscore = self.defaults.integer(forKey: "hs")
+
+                               if self.score > self.highscore
+                               {
+                                   self.highscore = self.score
+                                   
+                                   self.defaults.set(self.highscore, forKey: "hs")
+                               }
                       
                       
                       
@@ -416,11 +462,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                                                             
                                                            }))
            
-          
-            
-            
-            
-            
             
             if died == false{
                   
