@@ -17,6 +17,10 @@
 		AC04CC9324A688680092CA65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC04CC9124A688680092CA65 /* LaunchScreen.storyboard */; };
 		AC04CC9E24A688680092CA65 /* Road_AdventureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04CC9D24A688680092CA65 /* Road_AdventureTests.swift */; };
 		AC04CCA924A688680092CA65 /* Road_AdventureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04CCA824A688680092CA65 /* Road_AdventureUITests.swift */; };
+		AC45DF9A24AA1BB500F16A36 /* Choose.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC45DF9924AA1BB500F16A36 /* Choose.swift */; };
+		AC45DF9C24AA1D6100F16A36 /* Choose.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC45DF9B24AA1D6100F16A36 /* Choose.sks */; };
+		AC7D6E1E24A9197600759146 /* ChooseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7D6E1D24A9197600759146 /* ChooseVC.swift */; };
+		ACCBC91C24A7D74900142F6B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCBC91B24A7D74900142F6B /* HomeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		AC04CCA424A688680092CA65 /* Road AdventureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Road AdventureUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC04CCA824A688680092CA65 /* Road_AdventureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Road_AdventureUITests.swift; sourceTree = "<group>"; };
 		AC04CCAA24A688680092CA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC45DF9924AA1BB500F16A36 /* Choose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choose.swift; sourceTree = "<group>"; };
+		AC45DF9B24AA1D6100F16A36 /* Choose.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Choose.sks; sourceTree = "<group>"; };
+		AC7D6E1D24A9197600759146 /* ChooseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVC.swift; sourceTree = "<group>"; };
+		ACCBC91B24A7D74900142F6B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +91,9 @@
 		AC04CC7624A688650092CA65 = {
 			isa = PBXGroup;
 			children = (
+				AC45DF9824AA1B8500F16A36 /* GameScene */,
+				AC45DF9724AA1B4D00F16A36 /* HomeVC */,
+				AC45DF9624AA1B3400F16A36 /* ChooseVC */,
 				AC04CC8124A688650092CA65 /* Road Adventure */,
 				AC04CC9C24A688680092CA65 /* Road AdventureTests */,
 				AC04CCA724A688680092CA65 /* Road AdventureUITests */,
@@ -104,10 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				AC04CC8224A688650092CA65 /* AppDelegate.swift */,
-				AC04CC8424A688650092CA65 /* GameScene.sks */,
 				AC04CC8624A688650092CA65 /* Actions.sks */,
-				AC04CC8824A688650092CA65 /* GameScene.swift */,
-				AC04CC8A24A688650092CA65 /* GameViewController.swift */,
 				AC04CC8C24A688650092CA65 /* Main.storyboard */,
 				AC04CC8F24A688680092CA65 /* Assets.xcassets */,
 				AC04CC9124A688680092CA65 /* LaunchScreen.storyboard */,
@@ -132,6 +140,34 @@
 				AC04CCAA24A688680092CA65 /* Info.plist */,
 			);
 			path = "Road AdventureUITests";
+			sourceTree = "<group>";
+		};
+		AC45DF9624AA1B3400F16A36 /* ChooseVC */ = {
+			isa = PBXGroup;
+			children = (
+				AC7D6E1D24A9197600759146 /* ChooseVC.swift */,
+				AC45DF9B24AA1D6100F16A36 /* Choose.sks */,
+				AC45DF9924AA1BB500F16A36 /* Choose.swift */,
+			);
+			path = ChooseVC;
+			sourceTree = "<group>";
+		};
+		AC45DF9724AA1B4D00F16A36 /* HomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				ACCBC91B24A7D74900142F6B /* HomeVC.swift */,
+			);
+			path = HomeVC;
+			sourceTree = "<group>";
+		};
+		AC45DF9824AA1B8500F16A36 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				AC04CC8A24A688650092CA65 /* GameViewController.swift */,
+				AC04CC8424A688650092CA65 /* GameScene.sks */,
+				AC04CC8824A688650092CA65 /* GameScene.swift */,
+			);
+			path = GameScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +278,7 @@
 				AC04CC8524A688650092CA65 /* GameScene.sks in Resources */,
 				AC04CC9024A688680092CA65 /* Assets.xcassets in Resources */,
 				AC04CC9324A688680092CA65 /* LaunchScreen.storyboard in Resources */,
+				AC45DF9C24AA1D6100F16A36 /* Choose.sks in Resources */,
 				AC04CC8724A688650092CA65 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +305,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC04CC8924A688650092CA65 /* GameScene.swift in Sources */,
+				ACCBC91C24A7D74900142F6B /* HomeVC.swift in Sources */,
+				AC7D6E1E24A9197600759146 /* ChooseVC.swift in Sources */,
 				AC04CC8B24A688650092CA65 /* GameViewController.swift in Sources */,
+				AC45DF9A24AA1BB500F16A36 /* Choose.swift in Sources */,
 				AC04CC8324A688650092CA65 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

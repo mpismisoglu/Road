@@ -89,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                car = SKSpriteNode(imageNamed: "blue")
                car.position = CGPoint(x: self.frame.width/2, y: self.frame.height/7 )
                car.zPosition = 5
-               car.size = CGSize(width: 125, height: 300)
+               car.size = CGSize(width: 125, height: 250)
                let carTex = SKTexture(imageNamed: "blue")
                car.physicsBody = SKPhysicsBody(texture: carTex, size: car.size)
                car.physicsBody?.isDynamic = true
@@ -212,7 +212,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             }
             let roadCarTex = SKTexture(imageNamed: "roadCarBlue")
             self.roadCar.zPosition = 5
-            self.roadCar.size = CGSize(width: 125, height: 300)
+            self.roadCar.size = CGSize(width: 125, height: 250)
             self.roadCar.name = "roadCar"
           
             
