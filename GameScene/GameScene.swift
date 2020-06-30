@@ -19,6 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
 
     var car = SKSpriteNode()
     var coin = SKSpriteNode()
+    var coinICon = SKSpriteNode()
     var roadCar = SKSpriteNode()
     var originalPosition = CGPoint(x: 0, y: 0)
     var parallax = SKAction()
@@ -30,6 +31,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var highscoreLabel = SKLabelNode()
     var gameStarted = false
     var died = false
+     var coinNumber = SKLabelNode()
     var RestartBtn = SKSpriteNode()
     var timer = Timer()
     var timer2 = Timer()
@@ -37,6 +39,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var timer4 = Timer()
     var interval = 2.0
     var duration = Double()
+    var coinNum = 0
+    var chosenColor = "yellow"
+    var coinCollected = false
     
     
     
@@ -44,6 +49,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
   
     override func didMove(to view: SKView) {
+        if defaults.string(forKey: "carString") == nil {
+        defaults.set("yellow", forKey: "carString")
+        }
        createScene()
         
     }
@@ -59,8 +67,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         createScene()
     }
     func createScene() {
-        
         self.physicsWorld.contactDelegate = self
+        
+             coinICon = SKSpriteNode(imageNamed: "coin")
+              coinICon.position = CGPoint(x: self.frame.width/9, y: self.frame.height - 75)
+        coinICon.size = CGSize(width: 85, height: 85)
+        coinICon.zPosition = 10
+        addChild(coinICon)
+        
+       
+        coinNumber.fontSize = 82
+        
+        
+        coinNumber.fontName = "ChalkboardSE-Bold"
+        coinNumber.fontColor = UIColor.systemYellow
+        coinNumber.zPosition = 10
+        addChild(coinNumber)
+        
               bg = SKSpriteNode(imageNamed: "road")
                bg.position = CGPoint(x: self.frame.width/2, y:0)
               bg.zPosition = 3
@@ -85,8 +108,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
               self.addChild(bg2)
               self.addChild(bg3)
                
-               
-               car = SKSpriteNode(imageNamed: "blue")
+               chosenColor = defaults.string(forKey: "carString") as! String
+               car = SKSpriteNode(imageNamed: "\(chosenColor)")
                car.position = CGPoint(x: self.frame.width/2, y: self.frame.height/7 )
                car.zPosition = 5
                car.size = CGSize(width: 125, height: 250)
@@ -101,10 +124,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                addChild(car)
         
         scoreLabel.text = "\(score)m"
-        scoreLabel.fontSize = 92
+        scoreLabel.fontSize = 82
         scoreLabel.fontName = "ChalkboardSE-Bold"
-        scoreLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.2)
+        scoreLabel.position = CGPoint(x: self.frame.width/1.2, y: self.frame.height - 100)
         scoreLabel.zPosition = 10
+        scoreLabel.fontColor = UIColor.black
         addChild(scoreLabel)
                
                
@@ -112,7 +136,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func createButton() {
         
         RestartBtn = SKSpriteNode(imageNamed: "RestartBtn")
-        RestartBtn.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.4)
+        RestartBtn.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.5)
         RestartBtn.size = CGSize(width: 500, height: 400)
        RestartBtn.setScale(0)
         
@@ -122,7 +146,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         deadScoreLabel.text  = "Score: \(score)m"
         deadScoreLabel.fontSize = 45
         deadScoreLabel.fontName = "ChalkboardSE-Bold"
-        deadScoreLabel.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/1.4)
+        deadScoreLabel.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/1.5)
         deadScoreLabel.zPosition = 30
         deadScoreLabel.setScale(0)
         deadScoreLabel.fontColor = UIColor.black
@@ -130,7 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         highscoreLabel.text = "Highscore: \(highscore)m"
        highscoreLabel.fontSize = 45
         highscoreLabel.fontName = "ChalkboardSE-Bold"
-        highscoreLabel.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/1.6)
+        highscoreLabel.position = CGPoint(x: self.frame.size.width/2, y: self.frame.size.height/1.7)
        highscoreLabel.zPosition = 30
         highscoreLabel.setScale(0)
         highscoreLabel.fontColor = UIColor.black
@@ -163,6 +187,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.coin.physicsBody?.collisionBitMask = 0
             self.coin.physicsBody?.contactTestBitMask = Physics.car
             self.coin.name = "coin"
+            self.coinCollected = false
             
             
         
@@ -313,17 +338,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let firstBody = contact.bodyA
         let secondBody = contact.bodyB
         
-        if firstBody.categoryBitMask == Physics.car && secondBody.categoryBitMask == Physics.coin {
-            
-            secondBody.node?.removeFromParent()
-        }
-        
-        if firstBody.categoryBitMask == Physics.coin && secondBody.categoryBitMask == Physics.car {
-            
-            firstBody.node?.removeFromParent()
+        if (firstBody.categoryBitMask == Physics.car && secondBody.categoryBitMask == Physics.coin) || (firstBody.categoryBitMask == Physics.coin && secondBody.categoryBitMask == Physics.car)  {
 
             
-              }
+            coin.removeFromParent()
+            
+         
+            if coinCollected == false {
+            coinNum += 1
+                coinCollected = true
+            }
+            defaults.set(coinNum, forKey: "coin")
+            
+           
+        }
+        
         
         if firstBody.categoryBitMask == Physics.car && secondBody.categoryBitMask == Physics.roadCar {
             self.timer.invalidate()
@@ -494,7 +523,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                          bg2.run(parallax)
                          bg3.run(parallax)
       
-            timer = Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(spawn), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(spawn), userInfo: nil, repeats: true)
             timer2 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(spawnCar), userInfo: nil, repeats: true)
             timer3 = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(Score), userInfo: nil, repeats: true)
             
@@ -551,7 +580,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func update(_ currentTime: TimeInterval) {
+        coinNum = defaults.integer(forKey: "coin")
         
+        
+        if coinNum >= 999 {
+            coinNumber.position = CGPoint(x: self.frame.width/3, y: self.frame.height - 100)
+
+        }
+        if coinNum < 10 {
+            coinNumber.position = CGPoint(x: self.frame.width/4.5, y: self.frame.height - 100)
+
+               }
+        if coinNum >= 10 && coinNum < 100 {
+                  coinNumber.position = CGPoint(x: self.frame.width/4, y: self.frame.height - 100)
+
+               }
+        if coinNum >= 100 && coinNum < 999 {
+            coinNumber.position = CGPoint(x: self.frame.width/3.5, y: self.frame.height - 100)
+
+        }
+      
+        coinNumber.text = "\(coinNum)"
+
         parallax.duration = interval
         
         if bg.position.y <= -self.frame.size.height {
