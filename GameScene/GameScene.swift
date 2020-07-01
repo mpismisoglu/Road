@@ -519,7 +519,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         if gameStarted == false {
             parallax = SKAction.repeatForever(SKAction.move(by: CGVector(dx:0, dy: -self.frame.size.height - 50), duration:1.4))
 
-            bg.run(parallax)
+                         bg.run(parallax)
                          bg2.run(parallax)
                          bg3.run(parallax)
       
