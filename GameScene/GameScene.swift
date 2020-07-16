@@ -11,6 +11,7 @@ struct Physics {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
+    
     let defaults = UserDefaults()
     var bg = SKSpriteNode()
     var bg2 = SKSpriteNode()
@@ -42,6 +43,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var coinNum = 0
     var chosenColor = "yellow"
     var coinCollected = false
+    var playAgain = SKSpriteNode()
+    var toMenu = SKSpriteNode()
+    var beginLabel = SKLabelNode()
+    var moveLabel = SKLabelNode()
     
     
     
@@ -65,9 +70,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         interval = 2.0
         score = 0
         createScene()
+        moveLabel.setScale(1)
+        beginLabel.setScale(1)
     }
     func createScene() {
         self.physicsWorld.contactDelegate = self
+        
+        beginLabel.text = "Tap to start"
+        beginLabel.fontSize = 82
+        beginLabel.fontName = "ChalkboardSE-Bold"
+        beginLabel.fontColor = UIColor.black
+        beginLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.5)
+        beginLabel.zPosition = 100
+        addChild(beginLabel)
+        
+        moveLabel.text = "Slide to move"
+        moveLabel.fontSize = 82
+        moveLabel.fontName = "ChalkboardSE-Bold"
+        moveLabel.fontColor = UIColor.black
+        moveLabel.position = CGPoint(x: self.frame.width/2, y: self.frame.height/2.5)
+        moveLabel.zPosition = 100
+        addChild(moveLabel)
         
              coinICon = SKSpriteNode(imageNamed: "coin")
               coinICon.position = CGPoint(x: self.frame.width/9, y: self.frame.height - 75)
@@ -91,14 +114,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                bg.name = "bg"
                
                
-              bg2 = SKSpriteNode(imageNamed: "road-1")
+              bg2 = SKSpriteNode(imageNamed: "road")
                bg2.position = CGPoint(x: self.frame.size.width/2, y:self.frame.height)
               bg2.zPosition = 3
                bg2.size = CGSize(width: self.frame.size.width, height: self.frame.height*1.1)
                bg2.name = "bg2"
                
                
-              bg3 = SKSpriteNode(imageNamed: "road-2")
+              bg3 = SKSpriteNode(imageNamed: "road")
                bg3.position = CGPoint(x: self.frame.size.width/2, y:self.frame.height + bg2.position.y)
               bg3.zPosition = 3
                bg3.size = CGSize(width: self.frame.size.width, height: self.frame.height*1.1)
@@ -136,8 +159,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func createButton() {
         
         RestartBtn = SKSpriteNode(imageNamed: "RestartBtn")
-        RestartBtn.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.5)
-        RestartBtn.size = CGSize(width: 500, height: 400)
+        RestartBtn.position = CGPoint(x: self.frame.width/2, y: self.frame.height/1.7)
+        RestartBtn.size = CGSize(width: 500, height: 750)
        RestartBtn.setScale(0)
         
         
@@ -159,15 +182,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         highscoreLabel.setScale(0)
         highscoreLabel.fontColor = UIColor.black
         
+        playAgain = SKSpriteNode(imageNamed: "playAgain")
+        playAgain.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 2.2)
+        playAgain.size = CGSize(width: 400, height: 115)
+        playAgain.setScale(0)
+            playAgain.zPosition = 30
+        
+        toMenu = SKSpriteNode(imageNamed: "toMenu")
+        toMenu.position = CGPoint(x: self.frame.size.width / 2, y: self.frame.size.height / 3.2)
+        toMenu.size = CGSize(width: 400, height: 115)
+        toMenu.setScale(0)
+        toMenu.zPosition = 30
+        
+        
        
         
         addChild(RestartBtn)
         addChild(deadScoreLabel)
         addChild(highscoreLabel)
+        addChild(playAgain)
+        addChild(toMenu)
         
         RestartBtn.run(SKAction.scale(to: 1.5, duration: 0.15))
         deadScoreLabel.run(SKAction.scale(to: 1.5, duration: 0.15))
         highscoreLabel.run(SKAction.scale(to: 1.5, duration: 0.15))
+        playAgain.run(SKAction.scale(to: 1.5, duration: 0.15))
+        toMenu.run(SKAction.scale(to: 1.5, duration: 0.15))
+
+
+        
 
     }
     
@@ -512,11 +555,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
   
    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         let touch = touches.first
         let touchedPosition = touch?.location(in: self)
         originalPosition = touchedPosition!
         
         if gameStarted == false {
+            moveLabel.run(SKAction.scale(to: 0, duration: 0.3))
+            beginLabel.run(SKAction.scale(to: 0, duration: 0.3))
+
             parallax = SKAction.repeatForever(SKAction.move(by: CGVector(dx:0, dy: -self.frame.size.height - 50), duration:1.4))
 
                          bg.run(parallax)
@@ -534,7 +581,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         if died == true {
             
-            restartScene()
+            if let touch = touches.first
+                        {
+                            let touchLocation = touch.location(in: self)
+                            let touchNodes = nodes(at: touchLocation)
+                            
+                            if touchNodes.isEmpty == false
+                            {
+                                for node in touchNodes
+                                {
+                                    if let sprite = node as? SKSpriteNode
+                                    {
+                                      
+                                        if sprite == playAgain {
+                                            
+                                            restartScene()
+                                        }
+                                        
+                                        if sprite == toMenu {
+                                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "toMainMenu") as NSNotification.Name, object: nil)
+
+
+                                            
+                                        }
+                                        
+                                      
+                                    
+                                    }
+                                }
+                            }
+            }
+            
+           
         }
         
     }

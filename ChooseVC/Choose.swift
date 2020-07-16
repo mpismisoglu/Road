@@ -30,14 +30,22 @@ class Choose: SKScene, SKPhysicsContactDelegate{
     var buyAlertOnScreen = false
     var coinICon = SKSpriteNode()
     var coinNumber = SKLabelNode()
+    var back = SKSpriteNode()
     
 
     
     
     override func didMove(to view: SKView) {
         
+        back = SKSpriteNode(imageNamed: "BackBut")
+        back.position = CGPoint(x: 125, y: self.frame.height - 100)
+        back.size = CGSize(width: 250, height: 200)
+        back.zPosition = 12
+        
+        addChild(back)
+        
         coinICon = SKSpriteNode(imageNamed: "coin")
-                 coinICon.position = CGPoint(x: self.frame.width - 200, y: self.frame.height - 75)
+                 coinICon.position = CGPoint(x: self.frame.width - 200, y: self.frame.height - 100)
            coinICon.size = CGSize(width: 85, height: 85)
            coinICon.zPosition = 10
            addChild(coinICon)
@@ -52,20 +60,20 @@ class Choose: SKScene, SKPhysicsContactDelegate{
         let coinNum = defaults.integer(forKey: "coin")
         
         if coinNum >= 999 {
-              coinNumber.position = CGPoint(x: self.frame.width - 80, y: self.frame.height - 100)
+              coinNumber.position = CGPoint(x: self.frame.width - 80, y: self.frame.height - 125)
             coinNumber.fontSize = 65
 
           }
           if coinNum < 10 {
-              coinNumber.position = CGPoint(x: self.frame.width - 130, y: self.frame.height - 100)
+              coinNumber.position = CGPoint(x: self.frame.width - 130, y: self.frame.height - 125)
 
                  }
           if coinNum >= 10 && coinNum < 100 {
-            coinNumber.position = CGPoint(x: self.frame.width - 100, y: self.frame.height - 100)
+            coinNumber.position = CGPoint(x: self.frame.width - 100, y: self.frame.height - 125)
 
                  }
           if coinNum >= 100 && coinNum < 999 {
-              coinNumber.position = CGPoint(x: self.frame.width - 70, y: self.frame.height - 100)
+              coinNumber.position = CGPoint(x: self.frame.width - 70, y: self.frame.height - 125)
 
           }
         
@@ -241,6 +249,10 @@ class Choose: SKScene, SKPhysicsContactDelegate{
                               {
                                 
                                 if alertShowed == false {
+                                    if sprite == back {
+                                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "toHomeVC") as NSNotification.Name, object: nil)
+                                        
+                                    }
                                   if sprite == red
                                   {
                                     if redOwned == false {
