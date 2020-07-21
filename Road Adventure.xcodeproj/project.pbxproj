@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04BCD56F87F732FC503866CC /* Pods_Road_AdventureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 397BA78823BB3E2A179B5234 /* Pods_Road_AdventureTests.framework */; };
+		5AD149BCA74B9AFF65095BB4 /* Pods_Road_Adventure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344F10E64975B06196C7F06C /* Pods_Road_Adventure.framework */; };
+		9A924A1F57BEF62E2C720736 /* Pods_Road_Adventure_Road_AdventureUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08E2715DA554D27B909EF12 /* Pods_Road_Adventure_Road_AdventureUITests.framework */; };
 		AC04CC8324A688650092CA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04CC8224A688650092CA65 /* AppDelegate.swift */; };
 		AC04CC8524A688650092CA65 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC04CC8424A688650092CA65 /* GameScene.sks */; };
 		AC04CC8724A688650092CA65 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC04CC8624A688650092CA65 /* Actions.sks */; };
@@ -43,6 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		344F10E64975B06196C7F06C /* Pods_Road_Adventure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Road_Adventure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		397BA78823BB3E2A179B5234 /* Pods_Road_AdventureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Road_AdventureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50304FDA83CBC96D2D052BA5 /* Pods-Road AdventureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Road AdventureTests.release.xcconfig"; path = "Target Support Files/Pods-Road AdventureTests/Pods-Road AdventureTests.release.xcconfig"; sourceTree = "<group>"; };
+		6F1C1CD5AF94C21640C86B1B /* Pods-Road Adventure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Road Adventure.debug.xcconfig"; path = "Target Support Files/Pods-Road Adventure/Pods-Road Adventure.debug.xcconfig"; sourceTree = "<group>"; };
+		812FC3F649FD4737DADD9CDC /* Pods-Road Adventure-Road AdventureUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Road Adventure-Road AdventureUITests.debug.xcconfig"; path = "Target Support Files/Pods-Road Adventure-Road AdventureUITests/Pods-Road Adventure-Road AdventureUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB58286B40A30B74E11BA106 /* Pods-Road AdventureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Road AdventureTests.debug.xcconfig"; path = "Target Support Files/Pods-Road AdventureTests/Pods-Road AdventureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AC04CC7F24A688650092CA65 /* Road Adventure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Road Adventure.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC04CC8224A688650092CA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC04CC8424A688650092CA65 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -65,6 +74,9 @@
 		ACAC6D8624BF1CFA00D81874 /* Home.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Home.sks; path = "Road Adventure/Home.sks"; sourceTree = SOURCE_ROOT; };
 		ACAC6D8824BF1D0E00D81874 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		ACCBC91B24A7D74900142F6B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		C7455A71B0992A276F209255 /* Pods-Road Adventure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Road Adventure.release.xcconfig"; path = "Target Support Files/Pods-Road Adventure/Pods-Road Adventure.release.xcconfig"; sourceTree = "<group>"; };
+		CDBC47ABDEE00758AF2DAFC2 /* Pods-Road Adventure-Road AdventureUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Road Adventure-Road AdventureUITests.release.xcconfig"; path = "Target Support Files/Pods-Road Adventure-Road AdventureUITests/Pods-Road Adventure-Road AdventureUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D08E2715DA554D27B909EF12 /* Pods_Road_Adventure_Road_AdventureUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Road_Adventure_Road_AdventureUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AD149BCA74B9AFF65095BB4 /* Pods_Road_Adventure.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04BCD56F87F732FC503866CC /* Pods_Road_AdventureTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,12 +100,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A924A1F57BEF62E2C720736 /* Pods_Road_Adventure_Road_AdventureUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27C8DA0FBED24AF2E3E3FC51 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				344F10E64975B06196C7F06C /* Pods_Road_Adventure.framework */,
+				D08E2715DA554D27B909EF12 /* Pods_Road_Adventure_Road_AdventureUITests.framework */,
+				397BA78823BB3E2A179B5234 /* Pods_Road_AdventureTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2877CFDE234753EBC0E23CEC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F1C1CD5AF94C21640C86B1B /* Pods-Road Adventure.debug.xcconfig */,
+				C7455A71B0992A276F209255 /* Pods-Road Adventure.release.xcconfig */,
+				812FC3F649FD4737DADD9CDC /* Pods-Road Adventure-Road AdventureUITests.debug.xcconfig */,
+				CDBC47ABDEE00758AF2DAFC2 /* Pods-Road Adventure-Road AdventureUITests.release.xcconfig */,
+				AB58286B40A30B74E11BA106 /* Pods-Road AdventureTests.debug.xcconfig */,
+				50304FDA83CBC96D2D052BA5 /* Pods-Road AdventureTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		AC04CC7624A688650092CA65 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +141,8 @@
 				AC04CC9C24A688680092CA65 /* Road AdventureTests */,
 				AC04CCA724A688680092CA65 /* Road AdventureUITests */,
 				AC04CC8024A688650092CA65 /* Products */,
+				2877CFDE234753EBC0E23CEC /* Pods */,
+				27C8DA0FBED24AF2E3E3FC51 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,9 +224,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC04CCAD24A688680092CA65 /* Build configuration list for PBXNativeTarget "Road Adventure" */;
 			buildPhases = (
+				3056C93F015C5126ED87A878 /* [CP] Check Pods Manifest.lock */,
 				AC04CC7B24A688650092CA65 /* Sources */,
 				AC04CC7C24A688650092CA65 /* Frameworks */,
 				AC04CC7D24A688650092CA65 /* Resources */,
+				0D3315E240872BD58C920078 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,6 +243,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC04CCB024A688680092CA65 /* Build configuration list for PBXNativeTarget "Road AdventureTests" */;
 			buildPhases = (
+				7F0BFF9B74CCBAEAEAC057DA /* [CP] Check Pods Manifest.lock */,
 				AC04CC9524A688680092CA65 /* Sources */,
 				AC04CC9624A688680092CA65 /* Frameworks */,
 				AC04CC9724A688680092CA65 /* Resources */,
@@ -218,9 +262,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AC04CCB324A688680092CA65 /* Build configuration list for PBXNativeTarget "Road AdventureUITests" */;
 			buildPhases = (
+				BE711F7F9B5A24B88D20EE1C /* [CP] Check Pods Manifest.lock */,
 				AC04CCA024A688680092CA65 /* Sources */,
 				AC04CCA124A688680092CA65 /* Frameworks */,
 				AC04CCA224A688680092CA65 /* Resources */,
+				EE71EEE7C088DB6A32F0843A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -305,6 +351,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D3315E240872BD58C920078 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Road Adventure/Pods-Road Adventure-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Road Adventure/Pods-Road Adventure-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Road Adventure/Pods-Road Adventure-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3056C93F015C5126ED87A878 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Road Adventure-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7F0BFF9B74CCBAEAEAC057DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Road AdventureTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE711F7F9B5A24B88D20EE1C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Road Adventure-Road AdventureUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE71EEE7C088DB6A32F0843A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Road Adventure-Road AdventureUITests/Pods-Road Adventure-Road AdventureUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Road Adventure-Road AdventureUITests/Pods-Road Adventure-Road AdventureUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Road Adventure-Road AdventureUITests/Pods-Road Adventure-Road AdventureUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AC04CC7B24A688650092CA65 /* Sources */ = {
@@ -488,6 +637,7 @@
 		};
 		AC04CCAE24A688680092CA65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F1C1CD5AF94C21640C86B1B /* Pods-Road Adventure.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -507,6 +657,7 @@
 		};
 		AC04CCAF24A688680092CA65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7455A71B0992A276F209255 /* Pods-Road Adventure.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -526,6 +677,7 @@
 		};
 		AC04CCB124A688680092CA65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB58286B40A30B74E11BA106 /* Pods-Road AdventureTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -548,6 +700,7 @@
 		};
 		AC04CCB224A688680092CA65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50304FDA83CBC96D2D052BA5 /* Pods-Road AdventureTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -570,6 +723,7 @@
 		};
 		AC04CCB424A688680092CA65 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 812FC3F649FD4737DADD9CDC /* Pods-Road Adventure-Road AdventureUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -590,6 +744,7 @@
 		};
 		AC04CCB524A688680092CA65 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDBC47ABDEE00758AF2DAFC2 /* Pods-Road Adventure-Road AdventureUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

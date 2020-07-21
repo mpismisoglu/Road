@@ -570,7 +570,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                          bg2.run(parallax)
                          bg3.run(parallax)
       
-            timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(spawn), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 3.5, target: self, selector: #selector(spawn), userInfo: nil, repeats: true)
             timer2 = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(spawnCar), userInfo: nil, repeats: true)
             timer3 = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(Score), userInfo: nil, repeats: true)
             
@@ -594,12 +594,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                                     {
                                       
                                         if sprite == playAgain {
-                                            
+                                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showAd") as NSNotification.Name, object: nil)
+
                                             restartScene()
                                         }
                                         
                                         if sprite == toMenu {
+                                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showAd") as NSNotification.Name, object: nil)
                                             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "toMainMenu") as NSNotification.Name, object: nil)
+                                            
 
 
                                             
